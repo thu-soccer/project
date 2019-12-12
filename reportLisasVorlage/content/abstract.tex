@@ -1,0 +1,31 @@
+%!TEX root = ../main.tex
+
+\pagestyle{empty}
+
+% override abstract headline
+
+\renewcommand{\abstractname}{Zusammenfassung}
+
+\begin{abstract}
+
+Die Integration eines Kuka Industrieroboters in die Automatisierungsplattform autoEdition3 soll die Inbetriebnahme bei ZwickRoell und den Support beim Kunden optimieren. Bisher kompliziertes Programmieren des Kuka Roboters, das nur durch Experten auf der Kuka Steuerung möglich war, soll durch einfache Teaching-Abläufe in der hauseigenen autoEdition3 ersetzt werden.\newline 
+Um die Machbarkeit dieses Ziels nachzuweisen, sind verschiedene Funktionen, eines schon in einem vorherigen Projekt eingebetteten \ac{UR}, auf einen Kuka Roboter adaptiert worden. Um den Kuka Roboter über autoEdition3 steuern zu können, sind unter Anderem erst Grundlagen über die Entwicklungsumgebung, den Roboter und die Anbindung PROFINET gesammelt worden. Über ein Testprojekt in SIMATIC Manager S7 wurde die Anbindung und die prinzipielle Steuerung getestet. Nach erfolgreicher Implementierung im Testprojekt wurde der Kuka Roboter in die autoEdition3 eingebunden. Hier sind Funktionen, wie das manuelle Bewegen des Roboters, das Ausführen von verschiedenen Fahrbefehlen, das Auslesen von Fehlermeldungen, sowie die Steuerung des Greifers, umgesetzt worden.\newline  
+Durch dieses Projekt kann der Kuka Roboter über autoEdition3 geteached und auch gesteuert werden. Es ist möglich, den Kuka Roboter ganz genauso wie einen \ac{UR} über die autoEdition3 Oberfläche zu teachen und die Proben abzuarbeiten. Das heißt, der Kuka kann über die autoEditon3 Oberfläche im Handbetrieb verfahren werden und bestimmte Positionen können gespeichert werden, die dann in den Fahrsequenzen zum Bedienen der Maschinen abgefahren werden.\newline  
+Da alle \ac{UR} Funktionen auf den Kuka Roboter adaptiert werden können, ist die Umsetzbarkeit der Integration eines Kuka Roboters in die autoEdition3 bewiesen. Bedenken bezüglich der Versions-Konsistenz von mxAutomation\footnote{Bibliothek um den Kuka Roboter vom Siemens-Controller aus steuern zu können}, können erst durch längeres Beobachten von mxAutomation-Updates völlig beseitigt werden. Zudem muss überprüft werden, inwieweit sich der Konfigurationsprozess tatsächlich verkürzen lässt. Zweifelsfrei wird die Support-Abwicklung beim Endkunden aber durch die Möglichkeit eines Remote-Zugriffs optimiert. Der Schulungsaufwand für Mitarbeiter und Kunden kann zudem durch das einfachere Handling und durch die einheitliche Bedienung der verschiedenen Roboter erheblich verringert werden.
+
+
+\end{abstract}
+
+\renewcommand{\abstractname}{Abstract}
+
+\begin{abstract}
+
+The integration of a Kuka industrial robot into the autoEdition3 automation platform is intended to optimize commissioning at ZwickRoell and customer support. Previously complicated programming of the Kuka robot, which was only possible by experts on the Kuka controller, is to be replaced by simple teaching processes in the in-house autoEdition3.\newline 
+In order to prove the feasibility of this goal, various functions, of a \acf{UR} already embedded in a previous project, have been adapted to a Kuka robot. In order to be able to control the Kuka robot via autoEdition3, the basics about the development environment, the robot and the PROFINET connection have been collected. A test project in SIMATIC Manager S7 was used to test the connection and the basic control. After successful implementation in the test project, the Kuka robot was integrated into autoEdition3. Here, functions such as moving the robot manually, executing various motion commands, reading error messages, and controlling the gripper were implemented.\newline  
+Through this project the Kuka robot can be taught and also controlled via autoEdition3. It is possible to teach the Kuka robot just like a \ac{UR} via the autoEdition3 interface and process the samples. This means that the Kuka can be moved manually via the autoEditon3 interface and certain positions can be stored, which are then moved in the driving sequences to operate the machines.\newline  
+Since all \ac{UR} functions can be adapted to the Kuka robot, the feasibility of integrating a Kuka robot into the autoEdition3 has been proven. Concerns regarding the version consistency of mxAutomation\footnote{Library for controlling the robot from a Siemens controller} can only be completely eliminated by observing mxAutomation updates for a long time. In addition, it must be checked to what extent the configuration process can actually be shortened. Without a doubt, however, support processing at the end customer is optimized by the possibility of remote access. The training effort for employees and customers can also be considerably reduced through simpler handling and uniform operation of the various robots.
+
+
+
+
+\end{abstract}
