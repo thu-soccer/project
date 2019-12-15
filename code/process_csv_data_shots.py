@@ -2,8 +2,6 @@ import csv
 import datetime
 from functools import reduce
 
-
-
 class Dataset:
     def __init__(self, file_path):
         self.raw_results = []
@@ -79,7 +77,7 @@ class Dataset:
             goals = int(result['{}_goal'.format(team_letter)])
             shots = int(result['{}_shots'.format(team_letter)])
             shots_on_target = int(result['{}_shots_on_target'.format(team_letter)])
-#            shot_accuracy = shots_on_target / shots if shots > 0 else 0 # division by zero!
+#            shot_accuracy = shots_on_target / shots if shots > 0 else 0
 
             opposition_goals = int(result['{}_goal'.format(opposition_letter)])
             opposition_shots = int(result['{}_shots'.format(opposition_letter)])

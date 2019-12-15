@@ -12,7 +12,6 @@ from functools import reduce
 #sqlite> .quit
 
 
-
 class Dataset:
     def __init__(self, file_path):
         #id,country_id,league_id,season,stage,date,match_api_id,home_team_api_id,away_team_api_id,home_team_goal,away_team_goal,B365H,B365D,B365A
@@ -91,13 +90,7 @@ class Dataset:
                 opposition = result['home_team_api_id']
 
             goals = int(result['{}_goal'.format(team_letter)])
-#            shots = int(result['{}_shots'.format(team_letter)])
-#            shots_on_target = int(result['{}_shots_on_target'.format(team_letter)])
-#            shot_accuracy = shots_on_target / shots if shots > 0 else 0
-
             opposition_goals = int(result['{}_goal'.format(opposition_letter)])
-#            opposition_shots = int(result['{}_shots_on_target'.format(opposition_letter)])
-#            opposition_shots_on_target = int(result['{}_shots_on_target'.format(opposition_letter)])
 
             return {
                 'wins': 1 if goals > opposition_goals else 0,
