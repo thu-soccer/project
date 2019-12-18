@@ -1,24 +1,7 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@woiza 
-Learn Git and GitHub without any code!
-Using the Hello World guide, you’ll start a branch, write comments, and open a pull request.
+jupyter/.ipynb_checkpoints/
 
 
-2
-11dataBikeHsUlm/report
- Code Issues 0 Pull requests 0 Projects 0 Wiki Security Insights
-report/.gitignore
-@guydunigo guydunigo first part of Kathi's presentation
-8ee7fbf on 3 Jul
-274 lines (213 sloc)  2.65 KB
-  
+
 # Created by https://www.gitignore.io/api/latex
 # Edit at https://www.gitignore.io/?templates=latex
 
