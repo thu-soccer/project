@@ -1,4 +1,4 @@
-,id,country_id,league_id,season,date,match_api_id,home_team_api_id,away_team_api_id,home_team_goal,away_team_goal,B365H,B365D,B365A,home_team_shots,home_team_shots_on_target,home_team_shots_off_target,home_team_shot_accuracy,home_possession,away_team_shots,away_team_shots_on_target,away_team_shots_off_target,away_team_shot_accuracy,away_possession
+,id,country_id,league_id,season,date,match_api_id,home_team_api_id,away_team_api_id,home_team_goal,away_team_goal,B365H,B365D,B365A,home_team_shots,home_team_shots_on_target,home_team_shots_off_target,home_team_shot_accuracy,home_team_possession,away_team_shots,away_team_shots_on_target,away_team_shots_off_target,away_team_shot_accuracy,away_team_possession
 58,1730,1729,1729,2008/2009,2008-08-16 00:00:00,489043,9825,8659,1,0,1.2,6.5,15.0,25,12,13,0.48,57.824999999999996,5,2,3,0.4,32.175
 59,1731,1729,1729,2008/2009,2008-08-16 00:00:00,489044,8472,8650,0,1,5.5,3.6,1.67,7,4,3,0.5714285714285714,40.95,16,11,5,0.6875,49.050000000000004
 60,1732,1729,1729,2008/2009,2008-08-16 00:00:00,489045,8654,8528,2,1,1.91,3.4,4.2,12,5,7,0.4166666666666667,44.775,22,7,15,0.3181818181818182,45.224999999999994
