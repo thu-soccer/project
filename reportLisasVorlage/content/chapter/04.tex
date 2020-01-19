@@ -11,7 +11,7 @@ FROM Match
 ORDER BY date asc
 \end{lstlisting}
 
-Since the bookkeeper odds are highly correlated, as has been pointed out in \autoref{chap:data_understanding}, only Bet365 data (odds home team wins, odds away team wins, odds draw) will be used. For the first sliding window or option data on shoton, shotoff and possession are not necessary and therefore are dropped. Moreover the drops without odd infromation are dropped as well. The resulting data is saved as a CSV file:
+Since the bookkeeper odds are highly correlated, as has been pointed out in \autoref{chap:data_understanding}, only Bet365 data (odds home team wins, odds away team wins, odds draw) will be used. For the first sliding window or option data on shoton, shotoff and possession are not necessary and therefore are dropped. Moreover, rows without odds are dropped as well. The resulting data is saved as a CSV file:
 
 
 \begin{lstlisting}[language=Python, caption=Python code for matches\_all.csv]
