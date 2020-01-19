@@ -1,33 +1,37 @@
 %!TEX root = ../../main.tex
 %Khaled -> Model comparision
 \chapter{Modeling}
-\label{cha:Modeling}
+\label{cha:Modelling}
 
 %----------------------------------------------------------------------------------------
-In this part, we have successfully completed the data preparation phase and our sliding windows are ready to use. \newline \newline
-Modeling is generally carried out in several iterations. We ran several models using the default parameters and then fine-tuned the parameters. There is not a single model and a single execution which can satisfactorily answer our questions. For this, we tested several models to find the one that best fits our problem.
+In this phase, we have successfully completed the data preparation phase and our five sliding windows are ready to use. \newline \newline
+Modeling is an iterative process, in which we can apply several modeling techniques to the same problem using the default parameters and then fine-tuned them until we satisfy our quality criteria. There is not a single model and a single execution which can satisfactorily answer our questions. For this, we tested several models to find the one that best fits our problem.\newline \newline
+This phase comprises tasks such as select modeling techniques, generate test design, build model and assess model.
 
 
 %----------------------------------------------------------------------------------------
-\section{Selecting modeling techniques}
+\section{Select Modeling Techniques}
 
-As the first step in modeling, we decided to perform multi-class classification.\newline
+As a first step in modeling, we decided to choose Supervised Machine Learning algorithms, to perform multi-class classification because our objective is to predict the final result of a match between two teams, if there is a win by the home team, a draw or a win by the away team. \newline \newline
 Therefore, we have selected Decision Trees and Neural Networks as techniques in order to test its performance and find the most appropriate for our project.
 
 %----------------------------------------------------------------------------------------
-\section{Generating a test design}
+\section{Generate Test Design}
 
-Before building the model, we used the accuracy results as criteria to compare the performance of the models.\newline \newline
-To calculate the accuracy, we separated the dataset into train and test sets, built the model on the train set and estimated its quality on the separate test set. Our test set represents 30\% of the total dataset.\newline \newline
-We have also been careful to not shuffling the dataset because we have to keep the right order of the last 10 matches of the sliding window dataset.
+This part refers to the generation of a procedure to test the model quality and validity needs, before building our models. \newline \newline
+We have divided our dataset into training and test sets, the model is built based on the training set, and its quality is estimated based on the test set, which represents 30\% of the dataset. \newline
+We also took care to not shuffle the dataset as we need to keep the last 10 matches of the sliding windows dataset in the correct order. \newline \newline
+For training the models, we used automated stop as a strategy, after the training loss did not improve more than 0.0001 for 10 consecutive epochs or the model achieve 1000 epochs.\newline \newline
+To evaluate the models, we used the accuracy results as criteria.
+
 
 %----------------------------------------------------------------------------------------
-\section{Building the models}
+\section{Build Models}
 
-The aim of this part is to build several models before comparing the results and choosing the one with the best parameters.\newline \newline
-Most modeling techniques have a number of parameters that can be adjusted to control the modeling process.
-For our project, the Decision Trees can be modified by adjusting the depth of the tree. For Neural Networks, we can change the number of hidden layers, the neurons per layer and other parameters.\newline \newline
-Our multi-class classification goal is to predict the final result of a match between two teams. We mean that if the home team wins, the away team wins or draws. It is clear that we have 3 output classes. For this, We used the Decision tree classifier and the Multi-layer Perceptron as a supervised model of Neural network from scikit-learn API. We also built Neural Networks with the TensorFlow framework.
+The aim of this part is to build several models before comparing the results.\newline
+Most modeling techniques have a number of parameters that can be adjusted to control the modeling process.\newline \newline
+For our Supervised Machine Learning Algorithms, we used scikit-learn API to build Decision Tree and Multi-Layer Perceptron neural network. We also used TensorFlow framework to build basic sequential neural networks.\newline \newline
+The Decision Tree can be modified by adjusting the depth of the tree. For Neural Networks, we can change the number of hidden layers, the neurons per layer and other parameters.
 
 
 \subsection{Decision Tree Classifier}
@@ -36,7 +40,7 @@ A decision tree is a simple classification representation that learns from the d
 % \cite {DecisionTree: scikit-learn}. 
 Using the decision tree algorithm, we start at the root of the tree and divide the data on the feature that results in the largest information gain. We can then repeat this procedure until the leaves are pure.\newline \newline
 In our project, we set the depth of the tree at four.\newline
-Decision Tree Classifier achieved accuracy of 52.95\% using the first sliding window as the dataset, as shown in the following Figure.
+Decision Tree Classifier achieved accuracy of 52.95\% using the first sliding window as a dataset, as shown in the following Figure.
 
 \begin{figure}[h]
 \label{fig:DecisionTree}
@@ -63,14 +67,14 @@ As we see in the following plot, the graph of the cost function indicating that 
 \end{figure}
 The last step is to evaluate the performance of the model by calculating the accuracy of the prediction. We obtained 53.45\% for the training dataset and 52.77\% for the testing dataset.
 
-\subsection{Keras Sequential Model}
+\subsection{Keras Sequential Neural Network}
 
 To build the model, We used Sequential as a model type. Sequential is the easiest way to create a model in Keras. It allows to build a model layer by layer. Each layer has weights that correspond to the layer that follows it. \newline \newline %\cite{buildingDLModel}
 We tested networks with different depths from 1 to 4 hidden layers with a different number of neurons. Our first hidden layer has always more neurons than the input layer. We also have three nodes for the output layer.\newline \newline
 We used 'Dense' as the layer type. Dense is a standard layer type that works for most cases. In a dense layer, all the nodes in the previous layer connect to the nodes in the current one.\newline \newline
 We used Rectified Linear Activation (ReLU) as the activation function for the hidden layers and softmax for the output layer. Softmax sums the output up to 1 so that the output can be interpreted as probabilities. The model will then make its prediction according to the option which has a higher probability.\newline \newline
 The first layer needs an input shape. The input shape specifies the number of rows and columns in the input.\newline
-The last layer is the output layer. It has three nodes - one for each option: Home Win, Away Win and Draw, which is for our prediction, as shown in the following line of codes.\newline
+The last layer is the output layer. It has three nodes - one for each option: Home Win, Draw or Away Win, which is for our prediction, as shown in the following line of codes.\newline \newline \newline \newline \newline
 
 $model = tf.keras.Sequential([ \newline
   layers.Dense(13, activation='relu',input\_shape=(train\_X.shape[1],)), \newline
@@ -81,9 +85,9 @@ $model = tf.keras.Sequential([ \newline
 To compile the model, we chose Adam as an optimizer. The Adam Optimizer adjusts the learning rate throughout the training.\newline
 The learning rate determines the speed at which the optimal weights for the model are calculated.\newline\newline
 For the loss function, we used $sparse\_categorical\_crossentropy$. It is one of the most common choices for classification. A lower score indicates that the model is performing better.\newline \newline
-Weight regularization is another parameter that provides an approach to reduce over-fitting of a deep learning neural network model on training data and to improve the performance of the model on new data.\newline
+Weight regularization is a regularization technique that provides an approach to reduce over-fitting of a deep learning neural network model on training data and to improve the performance of the model on new data.\newline
 By default, no regularizer is used in layers. For this, We made some models with the addition of the L2 regularization, which is the sum of the squared weights.\newline \newline
-In other models, we have added dropout, which is a regularization technique for neural networks,to avoid over-fitting in neural networks.\newline \newline
+In other models, we have added dropout, which is another regularization technique for neural networks, to avoid over-fitting in neural networks.\newline \newline
 We found it interesting to compare the history of the accuracy of several models with different parameters, as shown in the following figure.
 
 
@@ -95,13 +99,7 @@ We found it interesting to compare the history of the accuracy of several models
 \end{center}
 \caption{Comparison of the history of accuracy models}
 \end{figure}
-
-
-%----------------------------------------------------------------------------------------
-\section{Assessing the model}
-
-At this time, we have a set of models, we examined them to determine which one is precise enough to be definitive.\newline \newline
-As we explained in building the models part, We created models with different amount of hidden layers and amount of neurons per layer. We also created models with different parameters, as shown in the following figures.\newline \newline
+We created models with different sliding windows options where we changed the number of hidden layers from one to four and the amount of neurons per layer\(High, Medium, Low and Funnel\). We have also created models with different regularization techniques \(weight regularization and dropout\), as shown in the following figures.\newline \newline
 
 
 \begin{figure}[h]
@@ -119,6 +117,20 @@ As we explained in building the models part, We created models with different am
 \end{center}
 \caption{Comparison of the models with different amount of hidden layers and amount of neurons per layer}
 \end{figure}
-According to the evaluation criteria, one of the best simple models uses the third sliding window, which contains 29 features, with two hidden layers with 29 neurons per layer.
+The best accuracy is 56.25\% using the third sliding window option, which contains 29 features, with two hidden layers with 29 neurons per layer.
+
+%----------------------------------------------------------------------------------------
+\section{Assess Models}
+
+In the last task of the modeling phase, we had a set of models, we examined them to determine which one is precise enough to be deployed.\newline \newline
+The evaluation criteria is based on the accuracy as a method.\newline \newline
+The first ranked model using Keras Sequantial Neural Network, as shown in the following figure:
+\begin{figure}[h]
+\label{fig:ranking}
+\begin{center}
+\includegraphics[scale=.8]{ranking}
+\end{center}
+\caption{The ranking of the tested modeling techniques}
+\end{figure}
 
 %----------------------------------------------------------------------------------------
