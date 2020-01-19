@@ -1,4 +1,46 @@
 %!TEX root = ../../main.tex
 
 \chapter{Data Preprocessing}
-%Sergej -> Sliding Window
+
+Based on \cite{football-predictor} five sliding windows for match data were implemented. The idea of these sliding windows is to deliver match data in historical order and to aggregate data on a team's performance during the last 10 games.
+First the relevant data was extracted in chronological order with the following SQL statement:
+
+\begin{lstlisting}[language=SQL, caption=SQL code for Sliding Window]
+SELECT id, country_id, league_id, season, date, home_team_api_id, away_team_api_id, home_team_goal, away_team_goal, B365H, B365D, B365A, shoton, shotoff, possession
+FROM Match
+ORDER BY date asc
+\end{lstlisting}
+
+Since the bookkeeper odds are highly correlated, as has been pointed out in \autoref{chap:data_understanding}, only Bet365 data (odds home team wins, odds away team wins, odds draw) will be used. For the first sliding window or option data on shoton, shotoff and possession are not necessary and therefore are dropped. Moreover the drops without odd infromation are dropped as well. The resulting data is saved as a CSV file:
+
+
+\begin{lstlisting}[language=Python, caption=Python code for matches\_all.csv]
+conn = sqlite3.connect("../data/eusoccerdatabase.sqlite")
+query = "SELECT id, country_id, league_id, season, date, match_api_id, home_team_api_id, away_team_api_id, home_team_goal, away_team_goal, B365H, B365D, B365A, shoton, shotoff, possession FROM Match ORDER BY date asc"
+df = pd.read_sql_query(query, conn)
+df = df[np.isfinite(df['B365H'])] # drop rows without odds
+df_noxml=df.drop(['shoton', 'shotoff', 'possession'], axis=1)
+df_noxml.to_csv("../data/matches_all.csv")
+\end{lstlisting}
+
+This CSV file consists now of 22592 rows each representing one football match including information on how many goals each team scored, what the odds were and the date of the match:
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=.55]{matches_all_csv.png}
+\end{center}
+\caption{Data for Option 1}
+\label{fig:matches_all_csv}
+\end{figure}
+
+With this CSV file the first option or sliding window was implemented. The code for it expects a CSV file and processes it row by row. For every match the outcome of the game based on scored goals is calculated. Moreover, statistics on how each of the two opponents performed in the previous ten games are generated:
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=.55]{sliding_window_option1.png}
+\end{center}
+\caption{Sliding Window Option 1}
+\label{fig:sliding_window_option1}
+\end{figure}
+
+As  an example we can see in row 0 that the home team won, which is indicated by a capital "H". The odds that the home team wins were 1.36, 4.50 for a draw and odds of 9.0 that the away team wins. In the last 10 matches the home team won 5 times, finished 3 matches with a draw, lost 2 times and scored 14 goals. Opposing teams were able to score 10 goals. Subsequent columns contain the equivalent statistics for the opposing/away team. The first sliding window reduces the total dataset to 20823 rows while generating 13 features. Furthermore, now 3 distinguishable classes (H = home team wins, A = away team wins, D = draw) are available.
