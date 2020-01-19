@@ -41,13 +41,12 @@ A decision tree is a simple classification representation that learns from the d
 Using the decision tree algorithm, we start at the root of the tree and divide the data on the feature that results in the largest information gain. We can then repeat this procedure until the leaves are pure.\newline \newline
 In our project, we set the depth of the tree at four.\newline
 Decision Tree Classifier achieved accuracy of 52.95\% using the first sliding window as a dataset, as shown in the following Figure.
-
-\begin{figure}[h]
-\label{fig:DecisionTree}
+\begin{figure}[H]
 \begin{center}
-\includegraphics[scale=.07]{DecisionTree}
+\includegraphics[scale=.7]{DecisionTree.png}
 \end{center}
 \caption{Decision Tree (max\_depth=4)}
+\label{fig:DecisionTree}
 \end{figure}
 
 
@@ -57,13 +56,12 @@ Multi-layer Perceptron (MLP) is a supervised learning algorithm consists of thre
 In our MLP Model, we used the first sliding window with 13 features in the input layer, two hidden layers, 52 neurons in the first one and 32 neurons in the second one. For the output layer, we have 3 neurons.\newline \newline  
 To be able to solve our problem, we used the sigmoid activation function(logistic) for the hidden layers and the softmax activation function for the output layer. We also used a stochastic gradient descent optimizer as a solver. \newline 
 As we see in the following plot, the graph of the cost function indicating that the training algorithm converged after the 90th epoch. \newline
-
-\begin{figure}[h]
-\label{fig:MLPcostfunction}
+\begin{figure}[H]
 \begin{center}
-\includegraphics[scale=.7]{MLPcostfunction}
+\includegraphics[scale=.7]{MLPcostfunction.png}
 \end{center}
 \caption{MLP Cost function}
+\label{fig:MLPcostfunction}
 \end{figure}
 The last step is to evaluate the performance of the model by calculating the accuracy of the prediction. We obtained 53.45\% for the training dataset and 52.77\% for the testing dataset.
 
@@ -89,33 +87,27 @@ Weight regularization is a regularization technique that provides an approach to
 By default, no regularizer is used in layers. For this, We made some models with the addition of the L2 regularization, which is the sum of the squared weights.\newline \newline
 In other models, we have added dropout, which is another regularization technique for neural networks, to avoid over-fitting in neural networks.\newline \newline
 We found it interesting to compare the history of the accuracy of several models with different parameters, as shown in the following figure.
-
-
-
-\begin{figure}[h]
-\label{fig:ModelCompare}
+\begin{figure}[H]
 \begin{center}
-\includegraphics[scale=.6]{ModelCompare}
+\includegraphics[scale=.6]{ModelCompare.png}
 \end{center}
 \caption{Comparison of the history of accuracy models}
+\label{fig:ModelCompare}
 \end{figure}
 We created models with different sliding windows options where we changed the number of hidden layers from one to four and the amount of neurons per layer\(High, Medium, Low and Funnel\). We have also created models with different regularization techniques \(weight regularization and dropout\), as shown in the following figures.\newline \newline
-
-
-\begin{figure}[h]
-\label{fig:colab_nn}
+\begin{figure}[H]
 \begin{center}
-\includegraphics[scale=.7]{colab_nn}
+\includegraphics[scale=.7]{colab_nn.png}
 \end{center}
 \caption{Comparison between the variation of the sliding windows and parameters}
+\label{fig:colab_nn}
 \end{figure}
-
-\begin{figure}[h]
-\label{fig:model3hiddenlayerneurons}
+\begin{figure}[H]
 \begin{center}
-\includegraphics[scale=.7]{model3hiddenlayerneurons}
+\includegraphics[scale=.7]{model3hiddenlayerneurons.png}
 \end{center}
 \caption{Comparison of the models with different amount of hidden layers and amount of neurons per layer}
+\label{fig:model3hiddenlayerneurons}
 \end{figure}
 The best accuracy is 56.25\% using the third sliding window option, which contains 29 features, with two hidden layers with 29 neurons per layer.
 
@@ -125,12 +117,11 @@ The best accuracy is 56.25\% using the third sliding window option, which contai
 In the last task of the modeling phase, we had a set of models, we examined them to determine which one is precise enough to be deployed.\newline \newline
 The evaluation criteria is based on the accuracy as a method.\newline \newline
 The first ranked model using Keras Sequantial Neural Network, as shown in the following figure:
-\begin{figure}[h]
-\label{fig:ranking}
+\begin{figure}[H]
 \begin{center}
-\includegraphics[scale=.8]{ranking}
+\includegraphics[scale=.8]{ranking.png}
 \end{center}
 \caption{The ranking of the tested modeling techniques}
+\label{fig:ranking}
 \end{figure}
-
 %----------------------------------------------------------------------------------------
