@@ -11,7 +11,10 @@ FROM Match
 ORDER BY date asc
 \end{lstlisting}
 
-Since the bookkeeper odds are highly correlated, as has been pointed out in \autoref{chap:data_understanding}, only Bet365 data (odds home team wins, odds away team wins, odds draw) will be used. For the first sliding window or option data on shoton, shotoff and possession are not necessary and therefore are dropped. Moreover, rows without odds are dropped as well. The resulting data is saved as a CSV file:
+Since the bookkeeper odds are highly correlated, as has been pointed out in \autoref{chap:data_understanding}, only Bet365 data (B365H = odds home team wins, B365A = odds away team wins, B365D = odds draw) will be used.
+
+\section {Option 1}
+For the first sliding window or option data on shoton, shotoff and possession are not necessary and therefore are dropped. Moreover, rows without odds are dropped as well. The resulting data is saved as a CSV file:
 
 
 \begin{lstlisting}[language=Python, caption=Python code for matches\_all.csv]
@@ -33,7 +36,7 @@ This CSV file consists now of 22592 rows each representing one football match in
 \label{fig:matches_all_csv}
 \end{figure}
 
-With this CSV file the first option or sliding window was implemented. The code for it expects a CSV file and processes it row by row. For every match the outcome of the game based on scored goals is calculated. Moreover, statistics on how each of the two opponents performed in the previous ten games are generated:
+This CSV file was then used for the first sliding window. The code for it \cite{sliding01} expects a CSV file and processes it row by row. For every match the outcome of the game based on scored goals is calculated. Moreover, statistics on how each of the two opponents performed in the previous ten games are generated:
 
 \begin{figure}[H]
 \begin{center}
@@ -43,4 +46,58 @@ With this CSV file the first option or sliding window was implemented. The code 
 \label{fig:sliding_window_option1}
 \end{figure}
 
-As  an example we can see in row 0 that the home team won, which is indicated by a capital "H". The odds that the home team wins were 1.36, 4.50 for a draw and odds of 9.0 that the away team wins. In the last 10 matches the home team won 5 times, finished 3 matches with a draw, lost 2 times and scored 14 goals. Opposing teams were able to score 10 goals. Subsequent columns contain the equivalent statistics for the opposing/away team. The first sliding window reduces the total dataset to 20823 rows while generating 13 features. Furthermore, now 3 distinguishable classes (H = home team wins, A = away team wins, D = draw) are available.
+As an example we can see in row 0 that the home team won, which is indicated by a capital "H". The odds that the home team wins were 1.36, 4.50 for a draw and odds of 9.0 that the away team wins. In the last 10 matches the home team won 5 times, finished 3 matches with a draw, lost 2 times and scored 14 goals. Opposing teams were able to score 10 goals. Subsequent columns contain the equivalent statistics for the opposing/away team. The first sliding window reduces the total dataset to 20823 rows and generates 13 features. Furthermore, now 3 distinguishable classes (H = home team wins, A = away team wins, D = draw) are available.
+
+
+\section {Option 2}
+This option, which uses a slightly enhanced version \cite{sliding02} of the first sliding window code, adds statistics on goal shots:
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=.55]{sliding_window_option2.png}
+\end{center}
+\caption{Sliding Window Option 2}
+\label{fig:sliding_window_option2}
+\end{figure}
+
+Unfortunately due to the poor choice of data origin this option reduces the dataset to 7033 rows. But on the bright site, this option extends the number of features to 21.
+
+\section {Option 3}
+Based on option 2, option 3 additionally calculates shot accuracy statistics with code written and executed in a Jupyter Notebook \cite{jupyter_sliding}:
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=.55]{sliding_window_option3.png}
+\end{center}
+\caption{Sliding Window Option 3}
+\label{fig:sliding_window_option3}
+\end{figure}
+
+
+
+Option 3 has 29 features and 7033 rows. "x\_shot\_accuracy" represents the percentage of the shots which actually hit the goal or goal keeper and "x\_shot\_efficiency" the percentage of the shots which actually were counted as goals.
+
+
+\section {Option 4}
+
+Option 4 again uses an enhanced enhanced version \cite{sliding04} of the first sliding window code and extends option 2 with ball possession statistics:
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=.55]{sliding_window_option4.png}
+\end{center}
+\caption{Sliding Window Option 4}
+\label{fig:sliding_window_option4}
+\end{figure}
+
+Ball possession is provided in minutes. This option has 6996 rows and 25 features.
+
+\section {Option 5}
+The last option is based on option 3 and additionally includes ball possession statistics. It has the highest number of features (33) and 6996 rows. The Python code for it can be found in the same Jupyter Notebook as for option 3 \cite{jupyter_sliding}.
+
+
+\section {Data Profiling Part 2}
+
+Using Pandas Profiling all sliding windows or options were profiled again. Here is and excerpt of the profile for option 3:
+
+
