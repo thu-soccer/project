@@ -19,8 +19,9 @@ Therefore, we have selected Decision Trees and Neural Networks as techniques in 
 \section{Generate Test Design}
 
 This part refers to the generation of a procedure to test the model quality and validity needs, before building our models. \newline \newline
-We have divided our dataset into training and test sets, the model is built based on the training set, and its quality is estimated based on the test set, which represents 30\% of the dataset. \newline
-We also took care to not shuffle the dataset as we need to keep the last 10 matches of the sliding windows dataset in the correct order. \newline \newline
+For some modeling techniques, we have divided our dataset into training and test sets, the model is built based on the training set, and its quality is estimated based on the test set, which represents 30\% of the dataset. \newline
+We also took care to not shuffle the dataset as we need to keep the last 10 matches of the sliding windows dataset in the correct order. \newline 
+For others, we only used 5\% for test set, a small amount because we wanted to keep as much data as possible for training and validation. The remaining 95\% are divided into 80\% training and 20\% validation datasets.\newline \newline
 For training the models, we used automated stop as a strategy, after the training loss did not improve more than 0.0001 for 10 consecutive epochs or the model exceeds 1000 training epochs.\newline \newline
 To evaluate the models, we used the accuracy results as criteria.
 
