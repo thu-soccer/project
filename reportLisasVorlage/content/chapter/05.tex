@@ -5,7 +5,7 @@
 
 %----------------------------------------------------------------------------------------
 In this phase, we have successfully completed the data preparation phase and our five sliding windows are ready to use. \newline \newline
-Modeling is an iterative process, in which we can apply several modeling techniques to the same problem using the default parameters and then fine-tuned them until we satisfy our quality criteria. There is not a single model and a single execution which can satisfactorily answer our questions. For this, we tested several models to find the one that best fits our problem.\newline \newline
+Modeling is an iterative process, in which we can apply several modeling techniques to the same problem using the default parameters and then fine-tune them until we satisfy our quality criteria. There is not a single model and a single execution which can satisfactorily answer our questions. For this, we tested several models to find the one that best fits our problem.\newline \newline
 This phase comprises tasks such as select modeling techniques, generate test design, build model and assess model.
 
 
@@ -21,7 +21,7 @@ Therefore, we have selected Decision Trees and Neural Networks as techniques in 
 This part refers to the generation of a procedure to test the model quality and validity needs, before building our models. \newline \newline
 We have divided our dataset into training and test sets, the model is built based on the training set, and its quality is estimated based on the test set, which represents 30\% of the dataset. \newline
 We also took care to not shuffle the dataset as we need to keep the last 10 matches of the sliding windows dataset in the correct order. \newline \newline
-For training the models, we used automated stop as a strategy, after the training loss did not improve more than 0.0001 for 10 consecutive epochs or the model achieve 1000 epochs.\newline \newline
+For training the models, we used automated stop as a strategy, after the training loss did not improve more than 0.0001 for 10 consecutive epochs or the model exceeds 1000 training epochs.\newline \newline
 To evaluate the models, we used the accuracy results as criteria.
 
 
@@ -30,7 +30,7 @@ To evaluate the models, we used the accuracy results as criteria.
 
 The aim of this part is to build several models before comparing the results.\newline
 Most modeling techniques have a number of parameters that can be adjusted to control the modeling process.\newline \newline
-For our Supervised Machine Learning Algorithms, we used scikit-learn API to build Decision Tree and Multi-Layer Perceptron neural network. We also used TensorFlow framework to build basic sequential neural networks.\newline \newline
+For our Supervised Machine Learning Algorithms, we used scikit-learn API to build a Decision Tree and Multi-Layer Perceptron neural network. We also used the TensorFlow/Keras framework to build basic sequential neural networks.\newline \newline
 The Decision Tree can be modified by adjusting the depth of the tree. For Neural Networks, we can change the number of hidden layers, the neurons per layer and other parameters.
 
 
@@ -39,8 +39,8 @@ The Decision Tree can be modified by adjusting the depth of the tree. For Neural
 A decision tree is a simple classification representation that learns from the data with a set of if-then-else decision rules.\newline \newline
 % \cite {DecisionTree: scikit-learn}. 
 Using the decision tree algorithm, we start at the root of the tree and divide the data on the feature that results in the largest information gain. We can then repeat this procedure until the leaves are pure.\newline \newline
-In our project, we set the depth of the tree at four.\newline
-Decision Tree Classifier achieved accuracy of 52.95\% using the first sliding window as a dataset, as shown in the following Figure.
+In our project, we set the depth of the tree to four.\newline
+The Decision Tree Classifier achieved an accuracy of 52.95\% using the first sliding window option as a dataset, as shown in the following Figure.
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=.075]{DecisionTree.png}
