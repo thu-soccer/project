@@ -73,13 +73,14 @@ We used 'Dense' as the layer type. Dense is a standard layer type that works for
 We used Rectified Linear Activation (ReLU) as the activation function for the hidden layers and softmax for the output layer. Softmax sums the output up to 1 so that the output can be interpreted as probabilities. The model will then make its prediction according to the option which has a higher probability.\newline \newline
 The first layer needs an input shape. The input shape specifies the number of rows and columns in the input.\newline
 The last layer is the output layer. It has three nodes - one for each option: Home Win, Draw or Away Win, which is for our prediction, as shown in the following line of codes.\newline \newline \newline \newline \newline
-
-$model = tf.keras.Sequential([ \newline
-  layers.Dense(13, activation='relu',input\_shape=(train\_X.shape[1],)), \newline
-  layers.Dense(16, activation='relu'),\newline
-  layers.Dense(8, activation='relu'),\newline
-  layers.Dense(3, activation='softmax')\newline
-])$ \newline \newline
+\begin{lstlisting}[language=Python, caption=Python code for simple Keras Sequantial Model Instantiation]
+model = tf.keras.Sequential([ 
+  layers.Dense(13, activation='relu',input\_shape=(train\_X.shape[1],)), 
+  layers.Dense(16, activation='relu'),
+  layers.Dense(8, activation='relu'),
+  layers.Dense(3, activation='softmax')
+])
+\end{lstlisting}
 To compile the model, we chose Adam as an optimizer. The Adam Optimizer adjusts the learning rate throughout the training.\newline
 The learning rate determines the speed at which the optimal weights for the model are calculated.\newline\newline
 For the loss function, we used $sparse\_categorical\_crossentropy$. It is one of the most common choices for classification. A lower score indicates that the model is performing better.\newline \newline
