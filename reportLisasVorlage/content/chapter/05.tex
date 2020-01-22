@@ -68,12 +68,11 @@ The last step is to evaluate the performance of the model by calculating the acc
 
 \subsection{Keras Sequential Neural Network}
 
-To build the model, We used Sequential as a model type. Sequential is the easiest way to create a model in Keras. It allows to build a model layer by layer. Each layer has weights that correspond to the layer that follows it. \newline \newline %\cite{buildingDLModel}
-We tested networks with different depths from 1 to 4 hidden layers with a different number of neurons. Our first hidden layer has always more neurons than the input layer. We also have three nodes for the output layer.\newline \newline
-We used 'Dense' as the layer type. Dense is a standard layer type that works for most cases. In a dense layer, all the nodes in the previous layer connect to the nodes in the current one.\newline \newline
-We used Rectified Linear Activation (ReLU) as the activation function for the hidden layers and softmax for the output layer. Softmax sums the output up to 1 so that the output can be interpreted as probabilities. The model will then make its prediction according to the option which has a higher probability.\newline \newline
+To build the model, we used Sequential as a model type. Sequential is the easiest way to create a model in Keras. It allows to build a model layer by layer. Each layer has weights that correspond to the layer that follows it.\newline%\cite{buildingDLModel}
+The chosen layer type is 'dense'. Dense is a standard layer type that works for most cases. In a dense layer, all the nodes in the previous layer connect to the nodes in the current one.\newline
+As activation function for the hidden layers 'Rectified Linear Activation' (ReLU) was used and 'Softmax' for the output layer. Softmax sums the output up to 1 so that the output can be interpreted as probabilities. The model will then make its prediction according to the option which has a higher probability.\newline \newline
 The first layer needs an input shape. The input shape specifies the number of rows and columns in the input.\newline
-The last layer is the output layer. It has three nodes - one for each option: Home Win, Draw or Away Win, which is for our prediction, as shown in the following line of codes.\newline \newline \newline \newline \newline
+The last layer is the output layer. It has three nodes - one for each option: Home Win, Draw or Away Win, which is for our prediction, as shown in the following line of codes.\newline \newline
 \begin{lstlisting}[language=Python, caption=Python code for simple Keras Sequantial Model Instantiation]
 model = tf.keras.Sequential([ 
   layers.Dense(13, activation='relu',input\_shape=(train\_X.shape[1],)), 
@@ -83,49 +82,130 @@ model = tf.keras.Sequential([
 ])
 \end{lstlisting}
 To compile the model, we chose Adam as an optimizer. The Adam Optimizer adjusts the learning rate throughout the training.\newline
-The learning rate determines the speed at which the optimal weights for the model are calculated.\newline\newline
-For the loss function, we used $sparse\_categorical\_crossentropy$. It is one of the most common choices for classification. A lower score indicates that the model is performing better.\newline \newline
+The learning rate determines the speed at which the optimal weights for the model are calculated.\newline
+For the loss function, we chose $sparse\_categorical\_crossentropy$. It is one of the most common choices for classification. A lower score indicates that the model is performing better.\newline \newline
 Weight regularization is a regularization technique that provides an approach to reduce over-fitting of a deep learning neural network model on training data and to improve the performance of the model on new data.\newline
-By default, no regularizer is used in layers. For this, We made some models with the addition of the L2 regularization, which is the sum of the squared weights.\newline \newline
-In other models, we have added dropout, which is another regularization technique for neural networks, to avoid over-fitting in neural networks.\newline \newline
-We found it interesting to compare the history of the accuracy of several models with different parameters, as shown in the following figure.
+By default, no regularizer is used in layers. For this, we made some models with the addition of the L2 regularization, which is the sum of the squared weights.\newline \newline
+In other models, we have added dropout, which is another regularization technique for neural networks, to avoid over-fitting in neural networks. Additionally we combined both regularization techniques in one model. \autoref{table:colab_nn} shows the test-accuracies of the models in comparison.
+
+The evolution of the loss-function of the generated models over time can be seen in \autoref{fig:ModelCompare}.
+
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=.6]{ModelCompare.png}
 \end{center}
-\caption{Comparison of the history of accuracy models}
+\caption{Evolution of the loss function of the models over time}
 \label{fig:ModelCompare}
 \end{figure}
-We created models with different sliding windows options where we changed the number of hidden layers from one to four and the amount of neurons per layer\(High, Medium, Low and Funnel\). We have also created models with different regularization techniques \(weight regularization and dropout\), as shown in the following figures.\newline \newline
-\begin{figure}[H]
-\begin{center}
-\includegraphics[scale=.7]{colab_nn.png}
-\end{center}
-\caption{Comparison between the variation of the sliding windows and parameters}
-\label{fig:colab_nn}
-\end{figure}
-\begin{figure}[H]
-\begin{center}
-\includegraphics[scale=.7]{model3hiddenlayerneurons.png}
-\end{center}
-\caption{Comparison of the models with different amount of hidden layers and amount of neurons per layer}
-\label{fig:model3hiddenlayerneurons}
-\end{figure}
-The best accuracy is 56.25\% using the third sliding window option, which contains 29 features, with two hidden layers with 29 neurons per layer.
 
-The architectures of the neural nets can be found in \autoref{section:appendix_a}.
+\begin{table}
+\centering
+\label{table:colab_nn}
+\begin{tabular}{|p{2cm}|p{2cm}|p{3cm}|p{2cm}|p{3cm}|}
+\hline
+ & \textbf{Normal} & \textbf{L2-Weight \newline Regularization} & \textbf{Dropout} & \textbf{Dropout \& \newline Regularization} \\ \hline
+\textbf{Model01} & 0.5220729 & 0.5191939 & 0.5191939 & 0.5268714 \\ \hline
+\textbf{Model02} & 0.5198864 & 0.52272725 & 0.5369318 & 0.50852275 \\ \hline
+\textbf{Model03} & 0.4943182 & 0.4971591 & 0.5113636 & 0.50852275 \\ \hline
+\textbf{Model04} & 0.5057143 & 0.5114286 & 0.49142858 & 0.4857143 \\ \hline
+\textbf{Model05} & 0.5 & 0.49714285 & 0.4942857 & 0.50285715 \\ \hline
 
-%----------------------------------------------------------------------------------------
-\section{Assess Models}
+\end{tabular}
+\caption{Test-accuracy of various models with different parameters}
+\label{table:colab_nn}
+\end{table}
 
-In the last task of the modeling phase, we had a set of models, we examined them to determine which one is precise enough to be deployed.\newline \newline
-The evaluation criteria is based on the accuracy as a method.\newline \newline
-The first ranked model using Keras Sequantial Neural Network, as shown in the following figure:
-\begin{figure}[H]
-\begin{center}
-\includegraphics[scale=.8]{ranking.png}
-\end{center}
-\caption{The ranking of the tested modeling techniques}
-\label{fig:ranking}
-\end{figure}
-%----------------------------------------------------------------------------------------
+To get a better feeling for the impact the number of hidden layers and the amount of neurons within each hidden layer have on the overall performance of the model, we conducted a series of tests.\newline
+We tested each sliding window option with a varying amount of hidden layers (\textbf{H1}-\textbf{H4}) and a varying number of neurons per layer (\textbf{H}igh, \textbf{M}edium, \textbf{L}ow and \textbf{F}unnel).\newline
+The architectures of the neural nets can be found in \autoref{section:appendix_a}.\newline
+
+The test-accuracies for the models based on sliding window option 1 can be seen in \autoref{table:nn_variation_sliding_01}.
+
+\begin{table}
+\centering
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+
+\textbf{Model01} & \textbf{H} & \textbf{M} & \textbf{L} & \textbf{F} \\ \hline
+\textbf{H1} & 0.537428 & 0.53358924 & 0.5460653 & - \\ \hline
+\textbf{H2} & 0.53262955 & 0.537428 & 0.53454894 & - \\ \hline
+\textbf{H3} & 0.5422265 & 0.537428 & 0.47408828 & 0.5393474 \\ \hline
+\textbf{H4} & 0.5431862 & 0.5393474 & 0.537428 & 0.537428 \\ \hline
+
+\end{tabular}
+\caption{Test-accuracies for variation of hidden layers and neurons for sliding window option 1}
+\label{table:nn_variation_sliding_01}
+\end{table}
+
+\autoref{table:nn_variation_sliding_02} shows the test-accuracies for the models based on sliding window option 2.
+
+\begin{table}
+\centering
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+
+\textbf{Model02} & \textbf{H} & \textbf{M} & \textbf{L} & \textbf{F} \\ \hline
+\textbf{H1} & 0.52840906 & 0.53409094 & 0.52840906 & - \\ \hline
+\textbf{H2} & 0.5198864 & 0.5255682 & 0.53125 & - \\ \hline
+\textbf{H3} & 0.5255682 & 0.53125 & 0.5369318 & 0.5369318 \\ \hline
+\textbf{H4} & 0.5198864 & 0.5198864 & 0.53977275 & 0.5255682 \\ \hline
+
+\end{tabular}
+\caption{Test-accuracies for variation of hidden layers and neurons for sliding window option 2}
+\label{table:nn_variation_sliding_02}
+\end{table}
+
+\autoref{table:nn_variation_sliding_03} shows the test-accuracies for the models based on sliding window option 3.
+
+\begin{table}
+\centering
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+
+\textbf{Model03} & \textbf{H} & \textbf{M} & \textbf{L} & \textbf{F} \\ \hline
+\textbf{H1} & 0.53977275 & 0.5426136 & 0.5511364 & - \\ \hline
+\textbf{H2} & 0.5625 & 0.5568182 & 0.54545456 & - \\ \hline
+\textbf{H3} & 0.53977275 & 0.5369318 & 0.5625 & 0.53977275 \\ \hline
+\textbf{H4} & 0.5625 & 0.5426136 & 0.54545456 & 0.5426136 \\ \hline
+
+\end{tabular}
+\caption{Test-accuracies for variation of hidden layers and neurons for sliding window option 3}
+\label{table:nn_variation_sliding_03}
+\end{table}
+
+\autoref{table:nn_variation_sliding_04} shows the test-accuracies for the models based on sliding window option 4.
+
+\begin{table}
+\centering
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+
+\textbf{Model04} & \textbf{H} & \textbf{M} & \textbf{L} & \textbf{F} \\ \hline
+\textbf{H1} & 0.5342857 & 0.5342857 & 0.5342857 & - \\ \hline
+\textbf{H2} & 0.5257143 & 0.5371429 & 0.5342857 & - \\ \hline
+\textbf{H3} & 0.5314286 & 0.5342857 & 0.5314286 & 0.52 \\ \hline
+\textbf{H4} & 0.5285714 & 0.5285714 & 0.5285714 & 0.5228571 \\ \hline
+
+\end{tabular}
+\caption{Test-accuracies for variation of hidden layers and neurons for sliding window option 4}
+\label{table:nn_variation_sliding_04}
+\end{table}
+
+\autoref{table:nn_variation_sliding_05} shows the test-accuracies for the models based on sliding window option 5.
+
+\begin{table}
+\centering
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+
+\textbf{Model05} & \textbf{H} & \textbf{M} & \textbf{L} & \textbf{F} \\ \hline
+\textbf{H1} & 0.5342857 & 0.52 & 0.5314286 & - \\ \hline
+\textbf{H2} & 0.5228571 & 0.5314286 & 0.5371429 & - \\ \hline
+\textbf{H3} & 0.5342857 & 0.5228571 & 0.5314286 & 0.5371429 \\ \hline
+\textbf{H4} & 0.5228571 & 0.5257143 & 0.5314286 & 0.52 \\ \hline
+
+\end{tabular}
+\caption{Test-accuracies for variation of hidden layers and neurons for sliding window option 5}
+\label{table:nn_variation_sliding_05}
+\end{table}
+

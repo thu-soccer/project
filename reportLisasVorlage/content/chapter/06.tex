@@ -1,5 +1,21 @@
 %!TEX root = ../../main.tex
 
 \chapter{Evaluation}
-We reached all the main goals for the project. The best model has a decent accuracy and we have learned many things about machine learning. Through the team work with SCRUM we were able to delegate the tasks in a way, that we get the best end solution. All steps were necessary for the final outcome and we documented everything, that the future team will be able to continue with our work. We are not in a stage that we could actually really earn very much money with our model, but we still have the goal to improve our model to reach higher accuracies. For the next semester the main part will be improving the model through additional features and through changing the hidden layers.
-%Kahled
+In this phase of the CRISP-DM Process we are going to evaluate the models, we previously generated.\newline
+The evaluation criteria is based on the test-accuracy.\newline
+The first ranked model is using Keras Sequantial Neural Network, as shown in \autoref{table:coparison_of_classifiers}:
+
+\begin{table}
+\centering
+\begin{tabular}{|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
+\hline
+
+\textbf{Rank} & \textbf{Model} & \textbf{Sliding Window Option} & \textbf{Parameters} & \textbf{Test-Accuracy} \\ \hline
+\textbf{1} & Keras Sequential Neural Network & 3 & Hidden layers: 2 (21, 21 neurons) & 0.5625 \\ \hline
+\textbf{2} & Multi-layer Perceptron & 1 & Hidden layers: 2 (52, 32 neurons) & 0.5345 \\ \hline
+\textbf{3} & Decision Tree & 1 & Depth = 4 & 0.5295 \\ \hline
+
+\end{tabular}
+\caption{Comparison of classifiers}
+\label{table:coparison_of_classifiers}
+\end{table}
