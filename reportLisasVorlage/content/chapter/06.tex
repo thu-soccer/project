@@ -1,11 +1,10 @@
 %!TEX root = ../../main.tex
 
 \chapter{Evaluation}
-In this phase of the CRISP-DM Process we are going to evaluate the models, we previously generated.\newline
-The evaluation criteria is based on the test-accuracy.\newline
-The first ranked model is using Keras Sequantial Neural Network, as shown in \autoref{table:coparison_of_classifiers}:
+In this phase of the CRISP-DM Process we are going to evaluate the models and the features, we previously generated.\newline
+The evaluation criteria for the models and in the same way for the features which are used, is based on the test-accuracy. The highest accuracy we reached jet, have been 56.25\% with the Sliding Window Option 1, which means with the highest amount of features. But because of the reason that every models are in the same range, which means there is no model which has a much smaller accuracy, it is not possible to tell the one with the highest accuracy the best model or has the best feature selection in every case. If you are using different data or a higher or smaller amount of features it could be possible to reach a better accuracy with another model than the one which reached the highest accuracy in the actual case. The first ranked model is using Keras Sequantial Neural Network, as shown in \autoref{table:coparison_of_classifiers}:
 
-\begin{table}
+\begin{table}[H]
 \centering
 \begin{tabular}{|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|p{2.5cm}|}
 \hline
@@ -19,3 +18,5 @@ The first ranked model is using Keras Sequantial Neural Network, as shown in \au
 \caption{Comparison of classifiers}
 \label{table:coparison_of_classifiers}
 \end{table}
+
+As you can see in the table \autoref{table:coparison_of_classifiers}, too, you can not even tell, that the more features you use, the better the outcome will be. For example with the Multi-layer Perceptron you get a worse accuracy with more features. But for the actual situation we recommend to use the first ranked model for predicting the outcome for football games, but we will maybe use a different model with other features in the future.
