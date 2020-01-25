@@ -83,7 +83,7 @@ Option 3 has 29 features and 7033 rows. "x\_shot\_accuracy" represents the perce
 
 \subsection {Option 4}
 
-Option 4 again uses an enhanced enhanced version \cite{sliding04} of the first sliding window code and extends option 2 with ball possession statistics:
+Option 4 again uses an enhanced version \cite{sliding04} of the first sliding window code and extends option 2 with ball possession statistics:
 
 \begin{figure}[H]
 \begin{center}
@@ -112,7 +112,7 @@ Using Pandas Profiling all sliding windows or options were profiled again. Here 
 \end{figure}
 
 Apart from one variable, which holds the classes respectively the outcome H, A, or D of a football match, all features/columns are numerical and no values (cells) are missing. As expected x-shots and x-shots\_on\_target are highly 
-correlated. Interestingly zero values are marked as warnings. However, in this context they are fine and still usable. Without having domain knowledge and purely relying on tools, one might be inclined to drop these values and lose valuable information. Another interesting information found in Pandas profiles is the total size in memory. 1.8 MiB shows that the data for option 3 is little and definitely small enough to fit into RAM or GPU memory. This information is valuable, as will be shown later.
+correlated. Interestingly zero values are marked as warnings. However, in this context they are fine and still usable. Without having domain knowledge and purely relying on tools, one might be inclined to drop these values and lose valuable information. Another interesting information found in Pandas profiling is the total size in memory. 1.8 MiB shows that the data for option 3 is little and definitely small enough to fit into RAM or GPU memory. This information is valuable, as will be shown later.
 \newline
 Since the profiles for the other options are similar to the one described above, they will not be explained.
 
@@ -134,7 +134,7 @@ dataframe[column_names_to_normalize] = df_temp
 
 \section {Encoding}
 
-The classes H,A,D respectively the outcome of football match which shall be predicted, have to be encoded before they can be used. Using sklearn this can be achieved with only a few lines of code:
+The classes H,A,D respectively the outcome of a football match which shall be predicted, have to be encoded before they can be used. Using sklearn this can be achieved with only a few lines of code:
 
 \begin{lstlisting}[language=Python, caption=Python code for encoding classes]
 from sklearn import preprocessing

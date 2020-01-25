@@ -6,7 +6,7 @@
 %----------------------------------------------------------------------------------------
 In this phase, we have successfully completed the data preparation phase and our five sliding windows are ready to use. \newline \newline
 Modeling is an iterative process, in which we can apply several modeling techniques to the same problem using the default parameters and then fine-tune them until we satisfy our quality criteria. There is not a single model and a single execution which can satisfactorily answer our questions. For this, we tested several models to find the one that best fits our problem.\newline \newline
-This phase comprises tasks such as select modeling techniques, generate test design, build model and assess model.
+This phase comprises tasks such as selecting modeling techniques, generating test designs and building models.
 
 
 %----------------------------------------------------------------------------------------
@@ -31,7 +31,7 @@ To evaluate the models, we used the accuracy results as criteria.
 
 The aim of this part is to build several models before comparing the results.\newline
 Most modeling techniques have a number of parameters that can be adjusted to control the modeling process.\newline \newline
-For our Supervised Machine Learning Algorithms, we used scikit-learn API to build a Decision Tree and Multi-Layer Perceptron neural network. We also used the TensorFlow/Keras framework to build basic sequential neural networks.\newline \newline
+For our Supervised Machine Learning Algorithms, we used the scikit-learn API to build a Decision Tree and Multi-Layer Perceptron neural network. We also used the TensorFlow/Keras framework to build basic sequential neural networks.\newline \newline
 The Decision Tree can be modified by adjusting the depth of the tree. For Neural Networks, we can change the number of hidden layers, the neurons per layer and other parameters.
 
 
@@ -51,9 +51,9 @@ The Decision Tree Classifier achieved an accuracy of 52.95\% using the first sli
 \end{figure}
 
 
-\subsection{Multi-layer Perceptron}
+\subsection{Multi-Layer Perceptron}
 
-Multi-layer Perceptron (MLP) is a supervised learning algorithm consisting of three layers: one input layer, one hidden layer, and one output layer. The units in the hidden layer are fully connected to the input layer, and the output layer is fully connected to the hidden layer.\newline \newline %\cite{PythonMachineLearning}
+Multi-Layer Perceptron (MLP) is a supervised learning algorithm consisting of three layers: one input layer, one hidden layer, and one output layer. The units in the hidden layer are fully connected to the input layer, and the output layer is fully connected to the hidden layer.\newline \newline %\cite{PythonMachineLearning}
 In our MLP Model, we used the first sliding window with 13 features in the input layer, two hidden layers, 52 neurons in the first one and 32 neurons in the second one. For the output layer, we have 3 neurons.\newline \newline  
 To be able to solve our problem, we used the sigmoid activation function(logistic) for the hidden layers and the softmax activation function for the output layer. We also used a stochastic gradient descent optimizer as a solver. \newline 
 As we see in the following plot, the graph of the cost function indicating that the training algorithm converged after the 90th epoch. \newline
@@ -92,7 +92,7 @@ The evolution of the loss-function of the generated models over time can be seen
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=.73]{ModelCompare.png}
+\includegraphics[scale=.6]{ModelCompare.png}
 \end{center}
 \caption{Evolution of the loss function of the models over time}
 \label{fig:ModelCompare}
